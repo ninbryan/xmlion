@@ -40,3 +40,42 @@ test('attributed elements with empty values', (assert) => {
     
     assert.end();
 });
+
+
+const lion = xmlion('xml', {}, []);
+    
+test('add attribute', (assert) => {
+    
+    lion.addAttribute('attr','add');
+    
+    let actual = lion.value();
+    
+    assert.equal(actual, '<xml attr="add"/>', 'xmlion must add attribute');
+    
+    assert.end();
+});
+
+test('remove attribute', (assert) => {
+    
+    lion.removeAttribute('attr');
+    
+    let actual = lion.value();
+    
+    assert.equal(actual, '<xml/>', 'xmlion must remove attribute');
+    
+    assert.end();
+});
+
+test('add many attributes', (assert) => {
+    
+    lion.addAttributes({
+        'attr1':'yup',
+        'attr2':'yo'
+    });
+    
+    let actual = lion.value();
+    
+    assert.equal(actual, '<xml attr1="yup" attr2="yo"/>', 'xmlion must add multiple attributes');
+    
+    assert.end();
+});

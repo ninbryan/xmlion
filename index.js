@@ -65,7 +65,14 @@ Lion.prototype.removeAttribute = function(name){
 };
 
 Lion.prototype.addAttributes = function(attr){
-    
+    let lion = this;
+    let names = Object.keys(attr);
+    let len = names.length;
+    for(let x = 0; x < len; x++ ){
+        let name = names[x];
+        lion.addAttribute(name, attr[name]);
+    }
+    return lion;
 };
 
 Lion.prototype.hasCubs = function(){
