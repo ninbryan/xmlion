@@ -7,7 +7,7 @@ function Lion(tagName, attributes, cubs) {
     }
     
     this.tagName = tagName;
-    this.attributes = attributes || {};
+    this.attr = attributes || {};
     this.cubs = cubs || [];
 }
 
@@ -15,10 +15,10 @@ Lion.prototype.ROARS = ROARS;
 
 Lion.prototype._buildAttributeString = function(){
     let attributes = '';
-    let keys = Object.keys(this.attributes);
+    let keys = Object.keys(this.attr);
     if (keys.length > 0) {
         keys.forEach((key) => {
-            attributes += ` ${key}="${this.attributes[key]}"`;
+            attributes += ` ${key}="${this.attr[key]}"`;
         });
     }
     return attributes;
@@ -50,6 +50,22 @@ Lion.prototype._buildElementString = function() {
     else {
         return `<${tagName}${attributes}/>`;
     }
+};
+
+Lion.prototype.addAttribute = function(name, value){
+    this.attr[name] = value;
+    return this;
+};
+
+Lion.prototype.removeAttribute = function(name){
+    if( this.attr[name] ){
+        delete this.attr[name];
+    }
+    return this;
+};
+
+Lion.prototype.addAttributes = function(attr){
+    
 };
 
 Lion.prototype.hasCubs = function(){
