@@ -83,4 +83,4 @@ Lion.prototype.value = function(){
     return this._buildElementString();
 };
 
-export default Lion;
+module.exports = Lion;

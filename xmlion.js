@@ -1,9 +1,5 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.xmlion = f()}})(function(){var define,module,exports;
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.xmlion = f()}})(function(){var define,module,exports;module={exports:(exports={})};
 'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
 var ROARS = true;
 
@@ -90,5 +86,5 @@ Lion.prototype.value = function () {
     return this._buildElementString();
 };
 
-exports.default = Lion;
-});
+module.exports = Lion;
+return module.exports;});
