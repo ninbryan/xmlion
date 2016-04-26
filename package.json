@@ -2,7 +2,6 @@
   "name": "xmlion",
   "version": "0.1.1",
   "description": "string building xml",
-  "author": "Bryan Maamo<ninjabryan@gmail.com>",
   "main": "index.js",
   "babel": {
     "presets": [
@@ -12,11 +11,15 @@
   "scripts": {
     "test": "babel-node test.js | faucet"
   },
-  "repository":{
-    "type":"git",
-    "url":"https://github.com/ninbryan/xmlion"
+  "author": "Bryan Maamo <ninjabryan@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ninbryan/xmlion"
   },
-  "keywords":["xml","string","lion"],
+  "bugs":{
+    "url": "https://github.com/ninbryan/xmlion/issues"
+  },
+  "keywords": ["xml", "string", "lion"],
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.7.6",
