@@ -6,20 +6,20 @@
 import xmlion from 'xmlion';
 
 // create a lion
-const divTest = xmlion('div', {class:'test'}, ['text']);
+const lion = xmlion('div', {class:'cat'}, ['meow']);
 
 // lion.value() returns a string
-divTest.value() == '<div class="test">text</div>';
+lion.value() == '<div class="cat">meow</div>';
 
 // lion.addAttribute(name, value)
-divTest.addAttribute('data-power', 1);
+lion.addAttribute('data-attribute', 'pride');
 
-divTest.value() == '<div class="test" data-power="1">text</div>';
+lion.value() == '<div class="cat" data-attribute="pride">meow</div>';
 
 // lion.removeAttribute(name)
-divTest.removeAttribute('class');
+lion.removeAttribute('class');
 
-divTest.value() == '<div data-power="1">text</div>';
+lion.value() == '<div data-attribute="pride">meow</div>';
 
 // try the hyperscript-helpers
 import helper from 'hyperscript-helpers';
@@ -27,9 +27,29 @@ const factory = helper(xmlion);
 const {div} = factory;
 
 // still works the same
-const divTest1 = xmlion('div', {class:'test','data-power':1}, ['text']);
-const divTest2 = div({class:'test','data-power':1}, ['text']);
+const lion1 = xmlion('div', {class:'cat','data-attribute':'pride'}, ['meow']);
+const lion2 = div({class:'cat','data-attribute':'pride'}, ['meow']);
 
-divTest1.value() == divTest2.value(); // probably?
+lion1.value() == lion2.value(); // probably?
+
+// lion can add a cub
+lion.addCub(lion1);
+
+lion.value() == '<div data-attribute="pride">meow<div class="cat" data-attribute="pride">meow</div></div>';
+
+// lion can remove a cub
+lion.removeCub(lion1);
+
+lion.value() == '<div data-attribute="pride">meow</div>';
+
+// lion can add many cubs
+lion.addCubs([lion1, lion2]);
+
+lion.value() == '<div data-attribute="pride">meow<div class="cat" data-attribute="pride">meow</div><div class="cat" data-attribute="pride">meow</div></div>';
+
+// lion can remove all cubs
+lion.removeAllCubs();
+
+lion.value() == '<div data-attribute="pride"/>';
 
 ```

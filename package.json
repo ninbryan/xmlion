@@ -1,13 +1,13 @@
 {
   "name": "xmlion",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "string building xml",
   "main": "xmlion.js",
   "scripts": {
     "test": "babel-node test.js | faucet",
     "build": "babel src -d lib",
     "umd": "umd -c xmlion lib/index.js xmlion.js",
-    "minify": "uglifyjs xmlion.js --compress --mangle --screw-ie8 -o xmlion.min.js",
+    "minify": "uglifyjs xmlion.js --compress --mangle --keep-fnames --screw-ie8 -o xmlion.min.js",
     "preumd": "npm run build",
     "prebuild": "npm run test",
     "preminify": "npm run umd"

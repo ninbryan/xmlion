@@ -13,6 +13,8 @@ function Lion(tagName, attributes, cubs) {
     this.cubs = cubs || [];
 }
 
+Lion.prototype.name = 'Lion';
+
 Lion.prototype.ROARS = ROARS;
 
 Lion.prototype._buildAttributeString = function () {
@@ -76,6 +78,32 @@ Lion.prototype.addAttributes = function (attr) {
         lion.addAttribute(name, attr[name]);
     }
     return lion;
+};
+
+Lion.prototype.addCub = function (cub) {
+    this.cubs.push(cub);
+    return this;
+};
+
+Lion.prototype.removeCub = function (cub) {
+    var lion = this;
+    var index = lion.cubs.indexOf(cub);
+    if (index >= 0) {
+        lion.cubs = lion.cubs.filter(function (c, i) {
+            return i != index;
+        });
+    }
+    return lion;
+};
+
+Lion.prototype.addCubs = function (cubs) {
+    this.cubs = this.cubs.concat(cubs);
+    return this;
+};
+
+Lion.prototype.removeAllCubs = function () {
+    this.cubs = [];
+    return this;
 };
 
 Lion.prototype.hasCubs = function () {
