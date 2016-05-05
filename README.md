@@ -1,5 +1,9 @@
 # xmlion
 
+```
+npm install xmlion
+```
+
 ```javascript
 
 // import xmlion
