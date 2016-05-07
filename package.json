@@ -1,9 +1,8 @@
 {
   "name": "xmlion",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "string building xml",
-  "main": "index.js",
-  "files":["dist"],
+  "main": "dist/xmlion.js",
   "scripts": {
     "test": "babel-node test.js | faucet",
     "build": "npm run minify",
