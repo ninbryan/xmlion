@@ -104,6 +104,8 @@ export class Lion {
     }
 }
 
-export default function xmlion(tagName, attributes, cubs) {
+export function xmlion(tagName, attributes, cubs) {
     return new Lion(tagName, attributes, cubs);
 }
+
+export default xmlion;

@@ -8,7 +8,7 @@
             exports: {}
         };
         factory(mod.exports);
-        global.index = mod.exports;
+        global.xmlion = mod.exports;
     }
 })(this, function (exports) {
     'use strict';
@@ -16,7 +16,7 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.default = xmlion;
+    exports.xmlion = xmlion;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -173,4 +173,6 @@
     function xmlion(tagName, attributes, cubs) {
         return new Lion(tagName, attributes, cubs);
     }
+
+    exports.default = xmlion;
 });

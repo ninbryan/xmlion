@@ -1,4 +1,4 @@
-import xmlion from './src/index';
+import xmlion from './src/xmlion';
 import test from 'tape';
 
 test('empty elements', (assert) => {
