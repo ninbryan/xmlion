@@ -1,16 +1,16 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports'], factory);
+        define(['module', 'exports'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports);
+        factory(module, exports);
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports);
+        factory(mod, mod.exports);
         global.xmlion = mod.exports;
     }
-})(this, function (exports) {
+})(this, function (module, exports) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -42,13 +42,15 @@
         };
     }();
 
+    var isArray = Array.isArray;
+
     var Lion = exports.Lion = function () {
         function Lion(tagName, attributes, cubs) {
             _classCallCheck(this, Lion);
 
             this.tagName = tagName;
             this.attr = attributes || {};
-            this.cubs = cubs || [];
+            this._cubs = cubs || [];
         }
 
         _createClass(Lion, [{
@@ -68,7 +70,7 @@
         }, {
             key: '_buildContentString',
             value: function _buildContentString() {
-                return this.cubs.map(function (cub) {
+                return this._cubs.map(function (cub) {
                     if (cub == null) {
                         return '';
                     }
@@ -123,16 +125,16 @@
         }, {
             key: 'addCub',
             value: function addCub(cub) {
-                this.cubs.push(cub);
+                this._cubs.push(cub);
                 return this;
             }
         }, {
             key: 'removeCub',
             value: function removeCub(cub) {
                 var lion = this;
-                var index = lion.cubs.indexOf(cub);
+                var index = lion._cubs.indexOf(cub);
                 if (index >= 0) {
-                    lion.cubs = lion.cubs.filter(function (c, i) {
+                    lion._cubs = lion._cubs.filter(function (c, i) {
                         return i != index;
                     });
                 }
@@ -141,19 +143,19 @@
         }, {
             key: 'addCubs',
             value: function addCubs(cubs) {
-                this.cubs = this.cubs.concat(cubs);
+                this._cubs = this._cubs.concat(cubs);
                 return this;
             }
         }, {
             key: 'removeAllCubs',
             value: function removeAllCubs() {
-                this.cubs = [];
+                this._cubs = [];
                 return this;
             }
         }, {
             key: 'hasCubs',
             value: function hasCubs() {
-                return this.cubs && this.cubs.length > 0;
+                return this._cubs && this._cubs.length > 0;
             }
         }, {
             key: 'value',
@@ -165,6 +167,18 @@
             get: function get() {
                 return true;
             }
+        }, {
+            key: 'cubs',
+            set: function set(cubs) {
+                if (isArray(cubs)) {
+                    this._cubs = cubs;
+                } else {
+                    throw 'Lion wants cubs[]';
+                }
+            },
+            get: function get() {
+                return this._cubs.slice(0);
+            }
         }]);
 
         return Lion;
@@ -175,4 +189,7 @@
     }
 
     exports.default = xmlion;
+
+
+    module.exports = xmlion;
 });

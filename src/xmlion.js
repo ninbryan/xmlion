@@ -1,12 +1,27 @@
+
+const {isArray} = Array;
+
 export class Lion {
     constructor(tagName, attributes, cubs) {
         this.tagName = tagName;
         this.attr = attributes || {};
-        this.cubs = cubs || [];
+        this._cubs = cubs || [];
     }
     
     get ROARS() {
         return true;
+    }
+    
+    set cubs(cubs) {
+        if (isArray(cubs)) {
+            this._cubs = cubs;
+        } else {
+            throw 'Lion wants cubs[]';
+        }
+    }
+    
+    get cubs() {
+        return this._cubs.slice(0);
     }
     
     _buildAttributeString() {
@@ -21,7 +36,7 @@ export class Lion {
     }
 
     _buildContentString() {
-        return this.cubs.map((cub) => {
+        return this._cubs.map((cub) => {
             if (cub == null) {
                 return '';
             }
@@ -72,31 +87,31 @@ export class Lion {
     }
 
     addCub(cub) {
-        this.cubs.push(cub);
+        this._cubs.push(cub);
         return this;
     }
 
     removeCub(cub) {
         let lion = this;
-        let index = lion.cubs.indexOf(cub);
+        let index = lion._cubs.indexOf(cub);
         if (index >= 0) {
-            lion.cubs = lion.cubs.filter((c, i) => (i != index));
+            lion._cubs = lion._cubs.filter((c, i) => (i != index));
         }
         return lion;
     }
 
     addCubs(cubs) {
-        this.cubs = this.cubs.concat(cubs);
+        this._cubs = this._cubs.concat(cubs);
         return this;
     }
 
     removeAllCubs() {
-        this.cubs = [];
+        this._cubs = [];
         return this;
     }
 
     hasCubs() {
-        return this.cubs && this.cubs.length > 0;
+        return this._cubs && this._cubs.length > 0;
     }
     
     value() {
@@ -109,3 +124,5 @@ export function xmlion(tagName, attributes, cubs) {
 }
 
 export default xmlion;
+
+module.exports = xmlion;

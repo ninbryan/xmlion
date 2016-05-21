@@ -125,3 +125,41 @@ test('remove all cubs', (assert) => {
     
     assert.end();
 });
+
+test('set new cubs', (assert) => {
+    
+    lion.cubs = ['cub1', ' ', 'cub2'];
+    
+    let actual = lion.value();
+    
+    assert.equal(actual, '<lion attr1="yup" attr2="yo">cub1 cub2</lion>', 'xmlion must set new cubs');
+    
+    assert.end();
+});
+
+
+test('fail a set new cubs', (assert) => {
+    
+    let block = () => {
+        lion.cubs = 'cub3';
+    };
+    
+    let err = 'Lion wants cubs[]';
+    
+    assert.throws(block, err, 'Fail to set cubs that is not Array');
+    
+    assert.end();
+});
+
+test('get cubs', (assert) => {
+    
+    let cubs = ['cub1', 'cub7'];
+    
+    lion.cubs = cubs;
+    
+    assert.equal(lion.cubs[1], cubs[1], 'last cub should be the same');
+    
+    assert.notEqual(lion.cubs, cubs, 'variable is not the same');
+    
+    assert.end();
+});
