@@ -54,18 +54,27 @@
         }
 
         _createClass(Lion, [{
+            key: 'setCubs',
+            value: function setCubs(cubs) {
+                return this.cubs = cubs;
+            }
+        }, {
+            key: 'getCubs',
+            value: function getCubs() {
+                return this.cubs;
+            }
+        }, {
             key: '_buildAttributeString',
             value: function _buildAttributeString() {
-                var _this = this;
-
-                var attributes = '';
-                var keys = Object.keys(this.attr);
+                var attr = this.attr;
+                var keys = Object.keys(attr);
                 if (keys.length > 0) {
-                    keys.forEach(function (key) {
-                        attributes += ' ' + key + '="' + _this.attr[key] + '"';
+                    var attributes = keys.map(function (key) {
+                        return ' ' + key + '="' + attr[key] + '"';
                     });
+                    return attributes.join('');
                 }
-                return attributes;
+                return '';
             }
         }, {
             key: '_buildContentString',

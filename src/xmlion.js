@@ -24,15 +24,22 @@ export class Lion {
         return this._cubs.slice(0);
     }
     
+    setCubs(cubs) {
+        return this.cubs = cubs;
+    }
+    
+    getCubs() {
+        return this.cubs;
+    }
+    
     _buildAttributeString() {
-        let attributes = '';
-        let keys = Object.keys(this.attr);
+        const attr = this.attr;
+        const keys = Object.keys(attr);
         if (keys.length > 0) {
-            keys.forEach((key) => {
-                attributes += ` ${key}="${this.attr[key]}"`;
-            });
+            let attributes = keys.map((key) => ` ${key}="${attr[key]}"`);
+            return attributes.join('');
         }
-        return attributes;
+        return '';
     }
 
     _buildContentString() {

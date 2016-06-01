@@ -163,3 +163,19 @@ test('get cubs', (assert) => {
     
     assert.end();
 });
+
+test('setCubs', (assert) => {
+   
+    lion.setCubs(['cub3','cub5']);
+    
+    assert.equal(lion.cubs[1], 'cub5', 'last cub should be cub5');
+    
+    assert.end();
+});
+
+test('getCubs', (assert) => {
+   
+    assert.equal(lion.getCubs()[0], 'cub3', 'last cub should be cub3');
+    
+    assert.end();
+});
