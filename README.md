@@ -1,8 +1,6 @@
 # xmlion
 
-```
-npm install xmlion
-```
+[![NPM](https://nodei.co/npm/xmlion.png)](https://nodei.co/npm/xmlion/)
 
 ```javascript
 

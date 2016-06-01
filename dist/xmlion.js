@@ -44,6 +44,32 @@
 
     var isArray = Array.isArray;
 
+    var clone = function clone(array) {
+        return array.slice(0);
+    };
+    var join = function join(array) {
+        return array.join('');
+    };
+    var map = function map(fn, array) {
+        return array.map(fn);
+    };
+    var filter = function filter(fn, array) {
+        return array.filter(fn);
+    };
+    var concat = function concat(array) {
+        for (var _len = arguments.length, arrays = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            arrays[_key - 1] = arguments[_key];
+        }
+
+        return array.concat.apply(array, arrays);
+    };
+    var toStringCub = function toStringCub(c) {
+        return c == null ? '' : c.ROARS ? c._buildElementString() : c;
+    };
+    var mapCubsToString = function mapCubsToString(cubs) {
+        return map(toStringCub, cubs);
+    };
+
     var Lion = exports.Lion = function () {
         function Lion(tagName, attributes, cubs) {
             _classCallCheck(this, Lion);
@@ -69,26 +95,16 @@
                 var attr = this.attr;
                 var keys = Object.keys(attr);
                 if (keys.length > 0) {
-                    var attributes = keys.map(function (key) {
+                    return join(map(function (key) {
                         return ' ' + key + '="' + attr[key] + '"';
-                    });
-                    return attributes.join('');
+                    }, keys));
                 }
                 return '';
             }
         }, {
             key: '_buildContentString',
             value: function _buildContentString() {
-                return this._cubs.map(function (cub) {
-                    if (cub == null) {
-                        return '';
-                    }
-                    if (cub.ROARS) {
-                        return cub._buildElementString();
-                    }
-
-                    return cub.toString();
-                }).join('');
+                return join(mapCubsToString(this._cubs));
             }
         }, {
             key: '_buildElementString',
@@ -108,34 +124,35 @@
         }, {
             key: 'addAttribute',
             value: function addAttribute(name, value) {
-                this.attr[name] = value;
-                return this;
+                var lion = this;
+                lion.attr[name] = value;
+                return lion;
             }
         }, {
             key: 'removeAttribute',
             value: function removeAttribute(name) {
-                if (this.attr[name]) {
-                    delete this.attr[name];
+                var lion = this;
+                if (lion.attr[name]) {
+                    delete lion.attr[name];
                 }
-                return this;
+                return lion;
             }
         }, {
             key: 'addAttributes',
             value: function addAttributes(attr) {
                 var lion = this;
                 var names = Object.keys(attr);
-                var len = names.length;
-                for (var x = 0; x < len; x++) {
-                    var name = names[x];
-                    lion.addAttribute(name, attr[name]);
-                }
+                map(function (name) {
+                    return lion.addAttribute(name, attr[name]);
+                }, names);
                 return lion;
             }
         }, {
             key: 'addCub',
             value: function addCub(cub) {
-                this._cubs.push(cub);
-                return this;
+                var lion = this;
+                lion._cubs.push(cub);
+                return lion;
             }
         }, {
             key: 'removeCub',
@@ -143,16 +160,18 @@
                 var lion = this;
                 var index = lion._cubs.indexOf(cub);
                 if (index >= 0) {
-                    lion._cubs = lion._cubs.filter(function (c, i) {
+                    lion.cubs = filter(function (c, i) {
                         return i != index;
-                    });
+                    }, lion.cubs);
                 }
                 return lion;
             }
         }, {
             key: 'addCubs',
             value: function addCubs(cubs) {
-                this._cubs = this._cubs.concat(cubs);
+                if (isArray(cubs)) {
+                    this.cubs = concat(this.cubs, cubs);
+                }
                 return this;
             }
         }, {
@@ -186,7 +205,7 @@
                 }
             },
             get: function get() {
-                return this._cubs.slice(0);
+                return clone(this._cubs);
             }
         }]);
 

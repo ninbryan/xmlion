@@ -1,5 +1,12 @@
 
 const {isArray} = Array;
+const clone = (array) => array.slice(0);
+const join = (array) => array.join('');
+const map = (fn, array) => array.map(fn);
+const filter = (fn, array) => array.filter(fn);
+const concat = (array, ...arrays) => array.concat(...arrays);
+const toStringCub = (c) => c == null ? '' : c.ROARS ? c._buildElementString() : c;
+const mapCubsToString = (cubs) => map(toStringCub, cubs);
 
 export class Lion {
     constructor(tagName, attributes, cubs) {
@@ -21,7 +28,7 @@ export class Lion {
     }
     
     get cubs() {
-        return this._cubs.slice(0);
+        return clone(this._cubs);
     }
     
     setCubs(cubs) {
@@ -36,32 +43,22 @@ export class Lion {
         const attr = this.attr;
         const keys = Object.keys(attr);
         if (keys.length > 0) {
-            let attributes = keys.map((key) => ` ${key}="${attr[key]}"`);
-            return attributes.join('');
+            return join(map((key) => ` ${key}="${attr[key]}"`, keys));
         }
         return '';
     }
 
     _buildContentString() {
-        return this._cubs.map((cub) => {
-            if (cub == null) {
-                return '';
-            }
-            if (cub.ROARS) {
-                return cub._buildElementString();
-            }
-
-            return cub.toString();
-        }).join('');
+        return join(mapCubsToString(this._cubs));
     }
 
     _buildElementString() {
-        let me = this;
-        let tagName = me.tagName;
-        let attributes = me._buildAttributeString();
+        const me = this;
+        const tagName = me.tagName;
+        const attributes = me._buildAttributeString();
 
         if (me.hasCubs()) {
-            let content = me._buildContentString();
+            const content = me._buildContentString();
 
             return `<${tagName}${attributes}>${content}</${tagName}>`;
         }
@@ -71,44 +68,45 @@ export class Lion {
     }
 
     addAttribute(name, value) {
-        this.attr[name] = value;
-        return this;
+        const lion = this;
+        lion.attr[name] = value;
+        return lion;
     }
 
     removeAttribute(name) {
-        if (this.attr[name]) {
-            delete this.attr[name];
-        }
-        return this;
-    }
-
-    addAttributes(attr) {
-        let lion = this;
-        let names = Object.keys(attr);
-        let len = names.length;
-        for (let x = 0; x < len; x++) {
-            let name = names[x];
-            lion.addAttribute(name, attr[name]);
+        const lion = this;
+        if (lion.attr[name]) {
+            delete lion.attr[name];
         }
         return lion;
     }
 
+    addAttributes(attr) {
+        const lion = this;
+        const names = Object.keys(attr);
+        map((name) => lion.addAttribute(name, attr[name]), names);
+        return lion;
+    }
+
     addCub(cub) {
-        this._cubs.push(cub);
-        return this;
+        const lion = this;
+        lion._cubs.push(cub);
+        return lion;
     }
 
     removeCub(cub) {
         let lion = this;
         let index = lion._cubs.indexOf(cub);
         if (index >= 0) {
-            lion._cubs = lion._cubs.filter((c, i) => (i != index));
+            lion.cubs = filter((c, i) => (i != index), lion.cubs);
         }
         return lion;
     }
 
     addCubs(cubs) {
-        this._cubs = this._cubs.concat(cubs);
+        if(isArray(cubs)){
+            this.cubs = concat(this.cubs, cubs);
+        }
         return this;
     }
 
