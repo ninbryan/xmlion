@@ -76,18 +76,30 @@
 
             this.tagName = tagName;
             this.attr = attributes || {};
-            this._cubs = cubs || [];
+            this.cubs = cubs || [];
         }
 
         _createClass(Lion, [{
             key: 'setCubs',
             value: function setCubs(cubs) {
-                return this.cubs = cubs;
+                this.cubs = cubs;
+                return this;
             }
         }, {
             key: 'getCubs',
             value: function getCubs() {
                 return this.cubs;
+            }
+        }, {
+            key: 'setAttributes',
+            value: function setAttributes(attr) {
+                this.attributes = attr;
+                return this;
+            }
+        }, {
+            key: 'getAttributes',
+            value: function getAttributes() {
+                return this.attributes;
             }
         }, {
             key: '_buildAttributeString',
@@ -206,6 +218,14 @@
             },
             get: function get() {
                 return clone(this._cubs);
+            }
+        }, {
+            key: 'attributes',
+            set: function set(attr) {
+                this.attr = attr;
+            },
+            get: function get() {
+                return this.attr;
             }
         }]);
 

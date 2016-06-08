@@ -12,7 +12,7 @@ export class Lion {
     constructor(tagName, attributes, cubs) {
         this.tagName = tagName;
         this.attr = attributes || {};
-        this._cubs = cubs || [];
+        this.cubs = cubs || [];
     }
     
     get ROARS() {
@@ -31,12 +31,30 @@ export class Lion {
         return clone(this._cubs);
     }
     
+    set attributes(attr) {
+        this.attr = attr;
+    }
+    
+    get attributes() {
+        return this.attr;
+    }
+    
     setCubs(cubs) {
-        return this.cubs = cubs;
+        this.cubs = cubs;
+        return this;
     }
     
     getCubs() {
         return this.cubs;
+    }
+    
+    setAttributes(attr) {
+        this.attributes = attr;
+        return this;
+    }
+    
+    getAttributes() {
+        return this.attributes;
     }
     
     _buildAttributeString() {

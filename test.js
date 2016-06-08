@@ -175,7 +175,21 @@ test('setCubs', (assert) => {
 
 test('getCubs', (assert) => {
    
-    assert.equal(lion.getCubs()[0], 'cub3', 'last cub should be cub3');
+    assert.equal(lion.getCubs()[0], 'cub3', 'first cub should be cub3');
     
     assert.end();
 });
+
+test('setAttributes', (assert) => {
+    
+    const lion = xmlion('lion');
+    
+    lion.setAttributes({prideful:true});
+    
+    assert.equal(lion.value(), '<lion prideful="true"/>', 'expected prideful lion');
+    
+    assert.end();
+});
+
+
+
