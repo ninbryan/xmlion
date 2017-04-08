@@ -2,10 +2,12 @@
 
 [![NPM](https://nodei.co/npm/xmlion.png)](https://nodei.co/npm/xmlion/)
 
+[![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
+
 ```javascript
 
 // import xmlion
-import xmlion from 'xmlion';
+import {xmlion} from 'xmlion';
 
 // create a lion
 const lion = xmlion('div', {class:'cat'}, ['meow']);
