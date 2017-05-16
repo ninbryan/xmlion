@@ -7,6 +7,8 @@ const concat = (array, ...arrays) => array.concat(...arrays);
 const toStringCub = (c) => c == null ? '' : c.ROARS ? c._buildElementString() : c;
 const mapCubsToString = (cubs) => map(toStringCub, cubs);
 
+export {version} from '../package.json';
+
 export class Lion {
   constructor (tagName, attributes, cubs) {
     this.tagName = tagName;

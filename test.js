@@ -1,5 +1,9 @@
-import {xmlion} from './dist/xmlion';
+import {xmlion, version} from './dist/xmlion';
 import test from 'ava';
+
+test('version', (assert) => {
+  assert.snapshot(version);
+});
 
 test('empty elements', (assert) => {
   let actual = xmlion('lion').value();

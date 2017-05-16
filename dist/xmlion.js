@@ -4,6 +4,8 @@
 	(factory((global.xmlion = global.xmlion || {})));
 }(this, (function (exports) { 'use strict';
 
+var version = "1.0.0";
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -223,6 +225,7 @@ var xmlion = function xmlion(tagName, attributes, cubs) {
 
 exports.Lion = Lion;
 exports.xmlion = xmlion;
+exports.version = version;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

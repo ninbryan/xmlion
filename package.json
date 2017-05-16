@@ -8,11 +8,13 @@
     "test": "ava --tap | tap-nyan",
     "pretest": "yarn run build:umd",
     "prebuild": "yarn run standard",
-    "build": "yarn run build:es && yarn run minify",
-    "build:es": "rollup src/xmlion.js --format es --output dist/xmlion.es.js",
+    "build": "yarn run minify:es && yarn run minify",
     "build:umd": "rollup -c",
+    "build:es": "rollup -c rollup.config.es.js",
     "minify": "uglifyjs dist/xmlion.js --compress --mangle --keep-fnames --screw-ie8 -o dist/xmlion.min.js",
+    "minify:es": "babili dist/xmlion.es.js --out-file dist/xmlion.min.es.js",
     "preminify": "yarn run build:umd",
+    "preminify:es": "yarn run build:es",
     "standard": "semistandard src/* test.js"
   },
   "semistandard": {
@@ -39,8 +41,10 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
+    "babili": "^0.0.12",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-json": "^2.1.1",
     "semistandard": "^10.0.0",
     "tap-nyan": "^1.1.0",
     "uglify-js": "^2.6.2"

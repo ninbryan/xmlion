@@ -1,3 +1,5 @@
+var version = "1.0.0";
+
 const {isArray} = Array;
 const clone = (array) => array.slice(0);
 const join = (array) => array.join('');
@@ -142,4 +144,4 @@ class Lion {
 
 const xmlion = (tagName, attributes, cubs) => new Lion(tagName, attributes, cubs);
 
-export { Lion, xmlion };
+export { Lion, xmlion, version };
