@@ -1,4 +1,4 @@
-var version = "1.0.0";
+const version = "1.0.0";
 
 const {isArray} = Array;
 const clone = (array) => array.slice(0);
