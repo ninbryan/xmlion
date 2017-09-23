@@ -56,11 +56,18 @@ class Lion {
     return this.attributes;
   }
 
+  handleBuildAttribute (key, value) {
+    if (value === null || value === undefined) {
+      return key;
+    }
+    return `${key}="${value}"`;
+  }
+
   _buildAttributeString () {
     const attr = this.attr;
-    const keys = Object.keys(attr);
+    const keys = Object.keys(attr).sort();
     if (keys.length > 0) {
-      return join(map((key) => ` ${key}="${attr[key]}"`, keys));
+      return join(map((key) => ` ${this.handleBuildAttribute(key, attr[key])}`, keys));
     }
     return '';
   }

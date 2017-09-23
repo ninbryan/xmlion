@@ -88,13 +88,23 @@ var Lion = function () {
       return this.attributes;
     }
   }, {
+    key: 'handleBuildAttribute',
+    value: function handleBuildAttribute(key, value) {
+      if (value === null || value === undefined) {
+        return key;
+      }
+      return key + '="' + value + '"';
+    }
+  }, {
     key: '_buildAttributeString',
     value: function _buildAttributeString() {
+      var _this = this;
+
       var attr = this.attr;
-      var keys = Object.keys(attr);
+      var keys = Object.keys(attr).sort();
       if (keys.length > 0) {
         return join(map(function (key) {
-          return ' ' + key + '="' + attr[key] + '"';
+          return ' ' + _this.handleBuildAttribute(key, attr[key]);
         }, keys));
       }
       return '';
