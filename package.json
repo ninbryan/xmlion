@@ -1,6 +1,6 @@
 {
   "name": "xmlion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "string building xml",
   "main": "dist/xmlion.js",
   "module": "dist/xmlion.es.js",
