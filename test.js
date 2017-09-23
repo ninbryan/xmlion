@@ -13,6 +13,18 @@ test('attributed elements', (assert) => {
   assert.is(actual, '<lion attr="test"/>', 'xmlion must make attributed elements');
 });
 
+test('elements with undefined attributes', (assert) => {
+  let actual = xmlion('lion', {attr: undefined}).value();
+
+  assert.is(actual, '<lion attr/>', 'xmlion must make attributed elements');
+});
+
+test('elements with null attributes', (assert) => {
+  let actual = xmlion('lion', {attr: null}).value();
+
+  assert.is(actual, '<lion attr/>', 'xmlion must make attributed elements');
+});
+
 test('attributed elements with content', (assert) => {
   let actual = xmlion('lion', {attr: 'test'}, ['test']).value();
 
