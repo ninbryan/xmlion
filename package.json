@@ -5,13 +5,14 @@
   "main": "dist/xmlion.js",
   "module": "dist/xmlion.es.js",
   "scripts": {
+    "m": "microbundle --help",
     "test": "ava --tap | tap-nyan",
     "pretest": "yarn run build:umd",
     "prebuild": "yarn run standard",
     "build": "yarn run build:es && yarn run minify",
-    "build:es": "rollup src/xmlion.js --format es --output dist/xmlion.es.js",
-    "build:umd": "rollup -c",
-    "minify": "uglifyjs dist/xmlion.js --compress --mangle --keep-fnames --screw-ie8 -o dist/xmlion.min.js",
+    "build:es": "microbundle build --format es --compress false --entry src/xmlion.js --output dist/",
+    "build:umd": "microbundle build --format umd --compress false --entry src/xmlion.js --output dist/ && mv dist/xmlion.umd.js dist/xmlion.js",
+    "minify": "microbundle build --format umd --compress true --entry src/xmlion.js --output dist/ && mv dist/xmlion.umd.js dist/xmlion.min.js",
     "preminify": "yarn run build:umd",
     "standard": "semistandard src/* test.js"
   },
@@ -39,10 +40,8 @@
     "babel-plugin-external-helpers": "6.22.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-latest": "6.24.1",
-    "rollup": "0.41.6",
-    "rollup-plugin-babel": "2.7.1",
+    "microbundle": "0.2.3",
     "semistandard": "10.0.0",
-    "tap-nyan": "1.1.0",
-    "uglify-js": "2.6.2"
+    "tap-nyan": "1.1.0"
   }
 }
